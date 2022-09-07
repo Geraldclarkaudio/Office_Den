@@ -50,15 +50,15 @@ public class Door : MonoBehaviour
 
         else
         {
-    
+
 
             if (_inputs.interact == true)
             {
                 Debug.Log("oPENED");
                 _anim.SetTrigger("Open");
                 canOpen = false;
-               
-            }              
+
+            }
         }
     }
 }
