@@ -42,23 +42,18 @@ public class Door : MonoBehaviour
 
     public void Update()
     {
-        if (canOpen == false)
+        if (_inputs.interact == true)
         {
-       
-            return;
-        }
-
-        else
-        {
-
-
-            if (_inputs.interact == true)
+            if (canOpen == true)
             {
                 Debug.Log("oPENED");
                 _anim.SetTrigger("Open");
                 canOpen = false;
-
+            }
+            else if (canOpen == false)
+            {
+                return;
             }
         }
-    }
+    }       
 }
