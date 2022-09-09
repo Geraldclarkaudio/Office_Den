@@ -6,10 +6,11 @@ using StarterAssets;
 public class Door : MonoBehaviour
 {
     [SerializeField]
-    private bool canOpen;
+    private bool canOpen = true;
 
     private StarterAssetsInputs _inputs;
 
+    [SerializeField]
     private Animator _anim;
     private UIManager _uiManager;
     [SerializeField]
@@ -18,15 +19,22 @@ public class Door : MonoBehaviour
     private void Start()
     {
         _inputs = GameObject.Find("PlayerCapsule").GetComponent<StarterAssetsInputs>();
-        _anim = GetComponentInChildren<Animator>();
+       
         _uiManager = GameObject.Find("UI").GetComponent<UIManager>();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            canOpen = true;
-            _uiManager.OpenDoorText();
+            if(canOpen == true)
+            {
+                _uiManager.OpenDoorText();
+            }
+            else if(canOpen == false)
+            {
+                _uiManager.CloseDoorText();
+            }
+            
             instructionPanel.SetActive(true);
         }
     }
@@ -42,17 +50,24 @@ public class Door : MonoBehaviour
 
     public void Update()
     {
-        if (_inputs.interact == true)
+        if(canOpen == true)
         {
-            if (canOpen == true)
+            if(_inputs.interact == true)
             {
                 Debug.Log("oPENED");
                 _anim.SetTrigger("Open");
+                _inputs.interact = false;
                 canOpen = false;
             }
-            else if (canOpen == false)
+        }
+
+        if(canOpen == false)
+        {
+            if(_inputs.interact == true)
             {
-                return;
+                _anim.SetTrigger("Close");
+                _inputs.interact = false;
+                canOpen = true;
             }
         }
     }       

@@ -12,6 +12,10 @@ public class UIManager : MonoBehaviour
     {
         text.text = "Press E To Open The Door";
     }
+    public void CloseDoorText()
+    {
+        text.text = "Press E To Close The Door";
+    }
 
     public void Speak()
     {
