@@ -12,15 +12,15 @@ public class Door : MonoBehaviour
 
     [SerializeField]
     private Animator _anim;
-    private UIManager _uiManager;
+    private UIManager1 _uiManager;
     [SerializeField]
     private GameObject instructionPanel;
 
     private void Start()
     {
-        _inputs = GameObject.Find("PlayerCapsule").GetComponent<StarterAssetsInputs>();
+        _inputs = GameObject.Find("Player").GetComponent<StarterAssetsInputs>();
        
-        _uiManager = GameObject.Find("UI").GetComponent<UIManager>();
+        _uiManager = GameObject.Find("UI").GetComponent<UIManager1>();
     }
     private void OnTriggerStay(Collider other)
     {
